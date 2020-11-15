@@ -17,7 +17,7 @@ def search():
     else:
       print("{}はいません".format(word))
       source.append(word)
-    print(source)
+    # print(source)
 
 
 
@@ -28,7 +28,7 @@ def read_csv_hoge(data):
     with open('data.csv') as f:
         for line in csv.reader(f):
             size = len(line)
-
+    # print(line)
     return line
 
         
