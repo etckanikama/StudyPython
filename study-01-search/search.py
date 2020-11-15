@@ -11,11 +11,7 @@ def read_csv_hoge(data):
             pass
     return line
 
-# def write_csv(data,word):
-#     with open(CSV_PATH,'a') as f:
-#         writer = csv.writer(f)
-#         writer.writerow([','+ word])
-#     return writer
+
 
 ## 検索ツール
 def search():
@@ -27,10 +23,11 @@ def search():
         print("{}が見つかりした".format(word))
     else:
         print("{}はいません".format(word))
-        # w = write_csv(CSV_PATH, word)
-        # with open(CSV_PATH,'a') as f:
-        #     writer = csv.writer(f, lineterminator=',')
-        #     writer.writerow([word])
+        array.append(word)
+        with open(CSV_PATH,'w') as f:
+            writer = csv.writer(f)
+            writer.writerow(array)
+
     # a = read_csv_hoge(CSV_PATH)
     # print(a)
 
