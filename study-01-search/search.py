@@ -22,13 +22,12 @@ def search():
 
 
 
-
+# csvファイル読み込み
 def read_csv_hoge(data):
     size=0
     with open('data.csv') as f:
         for line in csv.reader(f):
             size = len(line)
-    # print(line)
     return line
 
         
