@@ -1,3 +1,4 @@
+from base64 import a85encode
 import os
 from selenium.webdriver import Chrome, ChromeOptions
 import time
@@ -52,33 +53,51 @@ def main():
     # 検索ボタンクリック
     driver.find_element_by_class_name("topSearch__button").click()
 
-    # ページ終了まで繰り返し取得
-    exp_name_list = []
-    # 検索結果の一番上の会社名を取得
-    name_list = driver.find_elements_by_class_name("cassetteRecruit__name")
-    exp_catcopy_list = []
-    # キャッチコピーを取得
-    catcopy_list = driver.find_elements_by_class_name("labelCondition")
-    exp_date_list = []
-    # 更新日時を取得
-    date_list = driver.find_elements_by_class_name("cassetteRecruit__updateDate")
 
-    # 1ページ分繰り返し
-    for name,catcopy,date in zip(name_list,catcopy_list,date_list):
-        exp_name_list.append(name.text)
-        exp_catcopy_list.append(catcopy.text)
-        exp_date_list.append(date.text)
 
-        print(name.text)
-        # print(catcopy.text)
-        # print(date.text)
+    while(True):
+
+        # ページ終了まで繰り返し取得
+        exp_name_list = []
+        exp_catcopy_list = []
+        exp_date_list = []
+
+        # 検索結果の一番上の会社名を取得
+        name_list = driver.find_elements_by_class_name("cassetteRecruit__name")
+        # キャッチコピーを取得
+        catcopy_list = driver.find_elements_by_class_name("labelCondition")
+        # 更新日時を取得
+        date_list = driver.find_elements_by_class_name("cassetteRecruit__updateDate")
+
+        # 1ページ分繰り返し
+        for name,catcopy,date in zip(name_list,catcopy_list,date_list):
+            exp_name_list.append(name.text)
+            exp_catcopy_list.append(catcopy.text)
+            exp_date_list.append(date.text)
+        
+        # urlを取得する方法がわからない
+
+        # # 画面遷移のclassを取得
+        # next_url_class = driver.find_element_by_class_name("iconFont--arrowLeft")
+        # # class内のhrefを取得(=次のリンク.htmlが入っているはず)
+        next_url_href = driver.find_element_by_link_text("次へ")
+        print(next_url_href)
+
+
+        if next_url_href == None:
+            break
+
+        # 次の画面を開く
+        driver.get(next_url_href)
+    
+
 
 
     # print("二ページ目")
 
-    # # 二ページ目の
-    # driver.get("https://tenshoku.mynavi.jp/list/kw%E9%AB%98%E5%8F%8E%E5%85%A5/pg2/?jobsearchType=14&searchType=18")
-    # time.sleep(5)
+    # # # 二ページ目の
+    # # driver.get("https://tenshoku.mynavi.jp/list/kw%E9%AB%98%E5%8F%8E%E5%85%A5/pg2/?jobsearchType=14&searchType=18")
+    # # time.sleep(5)
     
     # # ページ終了まで繰り返し取得
     # new_exp_name_list = []
