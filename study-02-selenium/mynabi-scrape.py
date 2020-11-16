@@ -53,16 +53,40 @@ def main():
     # ページ終了まで繰り返し取得
     exp_name_list = []
     # 検索結果の一番上の会社名を取得
-    name_list = driver.find_elements_by_class_name("tableCondition__body")
+    name_list = driver.find_elements_by_class_name("cassetteRecruit__name")
 
     # 1ページ分繰り返し
     print(len(name_list))
     for name in name_list:
         exp_name_list.append(name.text)
         print(name.text)
-        
 
+    print("--------------")
 
+    exp_catcopy_list = []
+    # キャッチコピーを取得
+    catcopy_list = driver.find_elements_by_class_name("labelCondition")
+    # 1ページ分繰り返し
+
+    print(len(catcopy_list))
+    for catcopy in catcopy_list:
+        exp_catcopy_list.append(catcopy.text)
+        print(catcopy.text)
+    
+    print("--------------------------")
+
+    exp_date_list = []
+    # 更新日時を取得
+    date_list = driver.find_elements_by_class_name("cassetteRecruit__updateDate")
+
+    print(len(date_list))
+    for date in date_list:
+        exp_date_list.append(date.text)
+        print(date.text)
+    
+    print("--------------------------------")
+    print("finish")
+    
 # 直接起動された場合はmain()を起動(モジュールとして呼び出された場合は起動しないようにするため)
 if __name__ == "__main__":
     main()
