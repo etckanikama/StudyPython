@@ -78,9 +78,10 @@ def main():
         # urlを取得する方法がわからない
 
         # # 画面遷移のclassを取得
-        # next_url_class = driver.find_element_by_class_name("iconFont--arrowLeft")
+        next_url_class = driver.find_element_by_class_name("iconFont--arrowLeft")
+        next_url_href = next_url_class.find_element_by_tag_name("a").get_attribute("href")
         # # class内のhrefを取得(=次のリンク.htmlが入っているはず)
-        next_url_href = driver.find_element_by_link_text("次へ")
+        # next_url_href = driver.find_element_by_link_text("次へ")
         print(next_url_href)
 
 
@@ -88,7 +89,7 @@ def main():
             break
 
         # 次の画面を開く
-        driver.get(next_url_href)
+        # driver.get(next_url_class)
     
 
 
