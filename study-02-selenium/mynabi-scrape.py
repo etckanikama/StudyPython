@@ -2,9 +2,11 @@ import os
 from selenium.webdriver import Chrome, ChromeOptions
 import time
 import pandas as pd
+import sys
 # import chromedriver_binary
 # Chromeを起動する関数
 
+args = sys.argv
 
 def set_driver(driver_path, headless_flg):
     # Chromeドライバーの読み込み
@@ -29,7 +31,7 @@ def set_driver(driver_path, headless_flg):
 
 
 def main():
-    search_keyword = "高収入"
+    search_keyword = args[1]
     # driverを起動
     if os.name == 'nt': #Windows
         driver = set_driver("chromedriver.exe", False)
@@ -68,36 +70,36 @@ def main():
         exp_date_list.append(date.text)
 
         print(name.text)
-        print(catcopy.text)
-        print(date.text)
+        # print(catcopy.text)
+        # print(date.text)
 
 
-    print("二ページ目")
+    # print("二ページ目")
 
-    # 二ページ目の
-    driver.get("https://tenshoku.mynavi.jp/list/kw%E9%AB%98%E5%8F%8E%E5%85%A5/pg2/?jobsearchType=14&searchType=18")
-    time.sleep(5)
+    # # 二ページ目の
+    # driver.get("https://tenshoku.mynavi.jp/list/kw%E9%AB%98%E5%8F%8E%E5%85%A5/pg2/?jobsearchType=14&searchType=18")
+    # time.sleep(5)
     
-    # ページ終了まで繰り返し取得
-    new_exp_name_list = []
-    # 検索結果の一番上の会社名を取得
-    new_name_list = driver.find_elements_by_class_name("cassetteRecruit__name")
-    new_exp_catcopy_list = []
-    # キャッチコピーを取得
-    new_catcopy_list = driver.find_elements_by_class_name("labelCondition")
-    new_exp_date_list = []
-    # 更新日時を取得
-    new_date_list = driver.find_elements_by_class_name("cassetteRecruit__updateDate")
+    # # ページ終了まで繰り返し取得
+    # new_exp_name_list = []
+    # # 検索結果の一番上の会社名を取得
+    # new_name_list = driver.find_elements_by_class_name("cassetteRecruit__name")
+    # new_exp_catcopy_list = []
+    # # キャッチコピーを取得
+    # new_catcopy_list = driver.find_elements_by_class_name("labelCondition")
+    # new_exp_date_list = []
+    # # 更新日時を取得
+    # new_date_list = driver.find_elements_by_class_name("cassetteRecruit__updateDate")
 
-    # 1ページ分繰り返し
-    for name,catcopy,date in zip(new_name_list,new_catcopy_list,new_date_list):
-        new_exp_name_list.append(name.text)
-        new_exp_catcopy_list.append(catcopy.text)
-        new_exp_date_list.append(date.text)
+    # # 1ページ分繰り返し
+    # for name,catcopy,date in zip(new_name_list,new_catcopy_list,new_date_list):
+    #     new_exp_name_list.append(name.text)
+    #     new_exp_catcopy_list.append(catcopy.text)
+    #     new_exp_date_list.append(date.text)
 
-        print(name.text)
-        print(catcopy.text)
-        print(date.text)
+    #     print(name.text)
+    #     print(catcopy.text)
+    #     print(date.text)
 
 
 
