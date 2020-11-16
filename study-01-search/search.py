@@ -6,7 +6,7 @@ CSV_PATH = 'data.csv'
 
 # csvファイル読み込み
 def read_csv_hoge(data):
-    with open(CSV_PATH) as f:
+    with open(CSV_PATH, encoding="utf-8_sig") as f:
         for line in csv.reader(f):
             pass
     return line
@@ -17,16 +17,16 @@ def read_csv_hoge(data):
 def search():
     word =input("鬼滅の登場人物の名前を入力してください >>> ")
 
-    array = read_csv_hoge(CSV_PATH)
+    csv_array = read_csv_hoge(CSV_PATH)
     ### ここに検索ロジックを書く
-    if word in array:
+    if word in csv_array:
         print("{}が見つかりした".format(word))
     else:
         print("{}はいません".format(word))
-        array.append(word)
+        csv_array.append(word)
         with open(CSV_PATH,'w') as f:
             writer = csv.writer(f)
-            writer.writerow(array)
+            writer.writerow(csv_array)
 
     # a = read_csv_hoge(CSV_PATH)
     # print(a)
