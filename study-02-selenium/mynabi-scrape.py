@@ -72,10 +72,19 @@ def main():
         print(date.text)
 
 
-    print("finish")
+    print("二ページ目")
 
     # 二ページ目の
-    # driver.get("https://tenshoku.mynavi.jp/list/kw%E9%AB%98%E5%8F%8E%E5%85%A5/pg2/?jobsearchType=14&searchType=18")
+    driver.get("https://tenshoku.mynavi.jp/list/kw%E9%AB%98%E5%8F%8E%E5%85%A5/pg2/?jobsearchType=14&searchType=18")
+    time.sleep(5)
+    for name,catcopy,date in zip(name_list,catcopy_list,date_list):
+        exp_name_list.append(name.text)
+        exp_catcopy_list.append(catcopy.text)
+        exp_date_list.append(date.text)
+
+        print(name.text)
+        print(catcopy.text)
+        print(date.text)
 
 # 直接起動された場合はmain()を起動(モジュールとして呼び出された場合は起動しないようにするため)
 if __name__ == "__main__":
