@@ -52,15 +52,16 @@ def main():
         "topSearch__text").send_keys(search_keyword)
     # 検索ボタンクリック
     driver.find_element_by_class_name("topSearch__button").click()
+        # ページ終了まで繰り返し取得
 
+    exp_name_list = []
+    exp_catcopy_list = []
+    exp_date_list = []
 
 
     while(True):
 
-        # ページ終了まで繰り返し取得
-        exp_name_list = []
-        exp_catcopy_list = []
-        exp_date_list = []
+
 
         # 検索結果の一番上の会社名を取得
         name_list = driver.find_elements_by_class_name("cassetteRecruit__name")
@@ -74,52 +75,26 @@ def main():
             exp_name_list.append(name.text)
             exp_catcopy_list.append(catcopy.text)
             exp_date_list.append(date.text)
+            print(name.text)
+            print(catcopy.text)
+            print(date.text)
         
-        # urlを取得する方法がわからない
+
 
         # # 画面遷移のclassを取得
-        next_url_class = driver.find_element_by_class_name("iconFont--arrowLeft")
-        next_url_href = next_url_class.find_element_by_tag_name("a").get_attribute("href")
-        # # class内のhrefを取得(=次のリンク.htmlが入っているはず)
-        # next_url_href = driver.find_element_by_link_text("次へ")
-        print(next_url_href)
-
-
-        if next_url_href == None:
+        try:
+            next_url_class = driver.find_element_by_class_name("iconFont--arrowLeft")
+            next_url_href = next_url_class.get_attribute("href")
+            # # # 二ページ目の
+            driver.get(f'{next_url_href}')
+            time.sleep(5)
+        except:
+            print("存在しない")
             break
 
-        # 次の画面を開く
-        # driver.get(next_url_class)
+
     
 
-
-
-    # print("二ページ目")
-
-    # # # 二ページ目の
-    # # driver.get("https://tenshoku.mynavi.jp/list/kw%E9%AB%98%E5%8F%8E%E5%85%A5/pg2/?jobsearchType=14&searchType=18")
-    # # time.sleep(5)
-    
-    # # ページ終了まで繰り返し取得
-    # new_exp_name_list = []
-    # # 検索結果の一番上の会社名を取得
-    # new_name_list = driver.find_elements_by_class_name("cassetteRecruit__name")
-    # new_exp_catcopy_list = []
-    # # キャッチコピーを取得
-    # new_catcopy_list = driver.find_elements_by_class_name("labelCondition")
-    # new_exp_date_list = []
-    # # 更新日時を取得
-    # new_date_list = driver.find_elements_by_class_name("cassetteRecruit__updateDate")
-
-    # # 1ページ分繰り返し
-    # for name,catcopy,date in zip(new_name_list,new_catcopy_list,new_date_list):
-    #     new_exp_name_list.append(name.text)
-    #     new_exp_catcopy_list.append(catcopy.text)
-    #     new_exp_date_list.append(date.text)
-
-    #     print(name.text)
-    #     print(catcopy.text)
-    #     print(date.text)
 
 
 
