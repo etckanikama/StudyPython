@@ -92,6 +92,14 @@ def main():
             print("存在しない")
             break
 
+    # print(exp_name_list)
+    # pandasでcsvファイルに出力
+    colum = ['会社名','ラベル','情報更新日']
+    # df作成
+    df = pd.DataFrame(list(zip(exp_name_list,exp_catcopy_list,exp_date_list)),columns=colum)
+    # csv出力
+    df.to_csv("pandas_test.csv")
+
 
     
 
