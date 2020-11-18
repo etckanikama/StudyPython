@@ -2,10 +2,13 @@ from base64 import a85encode
 import os
 from selenium.webdriver import Chrome, ChromeOptions
 import time
+import datetime
 import pandas as pd
 import sys
 # import chromedriver_binary
 # Chromeを起動する関数
+date_page_logpath = "log/date_page_log_path.text"
+
 
 args = sys.argv
 
@@ -38,6 +41,10 @@ def main():
         driver = set_driver("chromedriver.exe", False)
     elif os.name == 'posix': #Mac
         driver = set_driver("chromedriver", False)
+    #開始時間＋書きこみ
+    page = 1
+    date_page_write(page)
+
     # Webサイトを開く
     driver.get("https://tenshoku.mynavi.jp/")
     time.sleep(5)
@@ -53,7 +60,7 @@ def main():
     # 検索ボタンクリック
     driver.find_element_by_class_name("topSearch__button").click()
         # ページ終了まで繰り返し取得
-
+    
     exp_name_list = []
     exp_catcopy_list = []
     exp_date_list = []
@@ -87,6 +94,8 @@ def main():
             next_url_href = next_url_class.get_attribute("href")
             # # # 二ページ目の
             driver.get(f'{next_url_href}')
+            page+=1
+            date_page_write(page)
             time.sleep(5)
         except:
             print("存在しない")
@@ -99,19 +108,25 @@ def main():
     df = pd.DataFrame(list(zip(exp_name_list,exp_catcopy_list,exp_date_list)),columns=colum)
     # csv出力
     df.to_csv("pandas_test.csv",encoding="utf-8_sig")
+    
 
-    # textに書きこみ
-    name_path = "log/name.text"
-    catcopy_path = "log/catcopy.text"
-    date_path = "log/date.text"
+    # # textに書きこみ
+    # name_path = "log/name.text"
+    # catcopy_path = "log/catcopy.text"
+    # date_path = "log/date.text"
 
-    with open(name_path, mode='w') as f:
-        f.write('\n'.join(exp_name_list))
-    with open(catcopy_path, mode='w') as f:
-        f.write('\n'.join(exp_catcopy_list))
-    with open(date_path, mode='w') as f:
-        f.write('\n'.join(exp_date_list))
+    # with open(name_path, mode='w') as f:
+    #     f.write('\n'.join(exp_name_list))
+    # with open(catcopy_path, mode='w') as f:
+    #     f.write('\n'.join(exp_catcopy_list))
+    # with open(date_path, mode='w') as f:
+    #     f.write('\n'.join(exp_date_list))
+    
 
+def date_page_write(page):
+    now = datetime.datetime.now()
+    with open(date_page_logpath, 'a') as f:
+        print("アクセス時刻:{},現在のページ：{}".format(now,page), file=f)
 
 
 
