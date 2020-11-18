@@ -98,7 +98,21 @@ def main():
     # df作成
     df = pd.DataFrame(list(zip(exp_name_list,exp_catcopy_list,exp_date_list)),columns=colum)
     # csv出力
-    df.to_csv("pandas_test.csv")
+    df.to_csv("pandas_test.csv",encoding="utf-8_sig")
+
+    # textに書きこみ
+    name_path = "log/name.text"
+    catcopy_path = "log/catcopy.text"
+    date_path = "log/date.text"
+
+    with open(name_path, mode='w') as f:
+        f.write('\n'.join(exp_name_list))
+    with open(catcopy_path, mode='w') as f:
+        f.write('\n'.join(exp_catcopy_list))
+    with open(date_path, mode='w') as f:
+        f.write('\n'.join(exp_date_list))
+
+
 
 
     
