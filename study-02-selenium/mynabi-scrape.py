@@ -35,6 +35,12 @@ def set_driver(driver_path, headless_flg):
 
 
 def main():
+    # data格納配列
+    exp_name_list = []
+    exp_catcopy_list = []
+    exp_date_list = []
+    exp_page_list = []
+
     search_keyword = args[1]
     # driverを起動
     if os.name == 'nt': #Windows
@@ -43,7 +49,8 @@ def main():
         driver = set_driver("chromedriver", False)
     #開始時間＋書きこみ
     page = 1
-    date_page_write(page)
+    exp_page_list.append(page)
+    data_log_write(exp_page_list)
 
     # Webサイトを開く
     driver.get("https://tenshoku.mynavi.jp/")
@@ -61,14 +68,10 @@ def main():
     driver.find_element_by_class_name("topSearch__button").click()
         # ページ終了まで繰り返し取得
     
-    exp_name_list = []
-    exp_catcopy_list = []
-    exp_date_list = []
+
 
 
     while(True):
-
-
 
         # 検索結果の一番上の会社名を取得
         name_list = driver.find_elements_by_class_name("cassetteRecruit__name")
@@ -94,8 +97,13 @@ def main():
             next_url_href = next_url_class.get_attribute("href")
             # # # 二ページ目の
             driver.get(f'{next_url_href}')
+            # 現在のページを格納
             page+=1
-            date_page_write(page)
+            exp_page_list.append(page)
+            data_log_write(exp_page_list)
+            # 試しにnameだけ格納してみる
+            data_log_write(exp_name_list)
+
             time.sleep(5)
         except:
             print("存在しない")
@@ -123,10 +131,11 @@ def main():
     #     f.write('\n'.join(exp_date_list))
     
 
-def date_page_write(page):
+def data_log_write(data_array):
     now = datetime.datetime.now()
-    with open(date_page_logpath, 'a') as f:
-        print("アクセス時刻:{},現在のページ：{}".format(now,page), file=f)
+    for data in data_array:
+        with open(date_page_logpath, 'a') as f:
+            print("[log:{}] {}".format(now,data), file=f)
 
 
 
