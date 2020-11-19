@@ -133,9 +133,10 @@ def main():
 
 def data_log_write(data_array):
     now = datetime.datetime.now()
-    for data in data_array:
-        with open(date_page_logpath, 'a') as f:
-            print("[log:{}] {}".format(now,data), file=f)
+    size = len(data_array)
+    # for data in data_array:
+    with open(date_page_logpath, 'a') as f:
+        print("[log:{}] {}".format(now,data_array[size:]), file=f)
 
 
 
