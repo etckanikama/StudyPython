@@ -13,7 +13,7 @@
     </form>
 
     <p>表示</p>
-    <textarea name="show" cols="30" rows="30"></textarea>
+    <textarea d ="result" name="show" cols="30" rows="30"></textarea>
     <script type="text/javascript" src="/eel.js"></script>
     <!-- <script type="text/javascript">
         // eel.python_function("aa")
@@ -30,6 +30,7 @@
             result.value += text;
 
         }
+        
         const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         function check(){
             if (document.form1.search.value == "" || document.form1.submit.value == "") {
@@ -37,7 +38,7 @@
                 return false;
             }
             else {
-                document.querySelector('textarea[name=show]').value = eel.write_log_py(text);
+                document.querySelector('textarea[name=show]').value = eel.write_log_py("hello");
                 _sleep(5000)
                 return false;
             }

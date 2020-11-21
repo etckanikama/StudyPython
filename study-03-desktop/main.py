@@ -1,9 +1,13 @@
 import eel
 import time
+import desktop
+
 
 # フォルダ名
-eel.init("html")
-eel.start("index.html")
+app_name = "html"
+end_point = "index.html"
+size = (700,600)
+# eel.start("index.html")
 
 
 
@@ -14,4 +18,4 @@ def write_log_py(text):
     eel.write_log("hello")
 
 
-eel.start("sample.html")
+desktop.start(app_name,end_point,size)
