@@ -6,28 +6,47 @@
 
 </head>
 <body>
-    <form name="form1" action="cgi-bin/example.cgi" method="post">
+    <form name="form1" action="" method="post">
         <p>検索したいキーワードを入力してください。</p>
         <input type="search" name="search" placeholder="キーワードを入力">
         <input type="submit" name="submit" value="検索" onclick="return check();">
     </form>
 
     <p>表示</p>
-    <textarea name="show" cols="30" rows="10"></textarea>
-    <!-- <script type="text/javascript" src="/eel.js"></script>
-    <script type="text/javascript">
-        eel.python_function("aa")
+    <textarea name="show" cols="30" rows="30"></textarea>
+    <script type="text/javascript" src="/eel.js"></script>
+    <!-- <script type="text/javascript">
+        // eel.python_function("aa")
+        // search.
+        
     </script> -->
+    
+
+    <!-- 検索欄に対するアラート -->
     <script type="text/javascript">
+
+        eel.expose(write_log)
+        function write_log(text){
+            result.value += text;
+
+        }
+        const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         function check(){
             if (document.form1.search.value == "" || document.form1.submit.value == "") {
                 alert("何か入力してください");
                 return false;
             }
             else {
-                return true;
+                document.querySelector('textarea[name=show]').value = eel.write_log_py(text);
+                _sleep(5000)
+                return false;
             }
         }
+
+
+
+
+  
     </script>
 
 

@@ -6,7 +6,38 @@
     <title>Document</title>
 </head>
 <body>
-    hello
+    <p>表示</p>
+    <textarea id ="result" name="show" cols="30" rows="30"></textarea>
+    <div id = "target"></div>
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript">
+        // var values;
+        // eel.expose(js_function)
+        // function js_function(values) {
+        //     document.getElementById("target").innerHTML = values;
+        // }
+        // async function run() {
+        //     let val = await eel.python_function2()();
+        //     console.log(val + " from Python")
+        // }
+        // run();
+        eel.expose(write_log)
+        function write_log(text){
+            result.value += text;
+            eel.write_log_py(text)
+        }
+
+
+
+
+        // async function run() {
+        //     let val = await eel.python_function2()();
+        //     result.value += text;
+
+        // }
+        // run();
+    </script>
+    
     
 </body>
 </html>
