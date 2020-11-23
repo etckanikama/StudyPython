@@ -37,11 +37,7 @@
                 // eel.write_log_py("hello");
                 eel.kimetsu_search(search.value)
 
-                eel.expose(write_log)
-                function write_log(text){
-                    result.value += text + "\n";
-
-                }
+                eel.write_log(text)
                 _sleep(5000)
                 return false;
             }
