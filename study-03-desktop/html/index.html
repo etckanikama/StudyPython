@@ -3,52 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>EEL</title>
+    <link rel="stylesheet" href="sample.css">
 
 </head>
 <body>
-    <form name="form1" action="" method="post">
+    <div class= "main">
+        <!-- <form name="form1" action="" method="post"> -->
         <p>検索したいキーワードを入力してください。</p>
         <input id ="search" type="search" name="search" placeholder="キーワードを入力">
         <input id ="submit" type="submit" name="submit" value="検索" onclick="return check();">
-    </form>
-
-    <p>表示</p>
-    <textarea id ="result" name="show" cols="30" rows="30"></textarea>
-    <script type="text/javascript" src="/eel.js"></script>
+        <!-- </form> -->
+    
+        <p>表示</p>
+        <textarea id ="result" name="show" cols="30" rows="30"></textarea>
+        <script type="text/javascript" src="/eel.js"></script>
+        
+    
+        <!-- 検索欄に対するアラート -->
+        <script type="text/javascript">
+    
+            eel.expose(write_log)
+            function write_log(text){
+                result.value += text + "\n";
+    
+            }
+    
+            const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+            function check(){
+                if (search.value == "" || submit.value == "") {
+                    alert("何か入力してください");
+                    return false;
+                }
+                else {
+                    // document.querySelector('textarea[name=show]').value = eel.write_log_py("hello");
+                    // eel.write_log_py("hello");
+                    eel.kimetsu_search(search.value)
+    
+                    eel.write_log(text)
+                    _sleep(5000)
+                    return false;
+                }
+            }
+    
+    
+    
+    
+      
+        </script>
     
 
-    <!-- 検索欄に対するアラート -->
-    <script type="text/javascript">
-
-        eel.expose(write_log)
-        function write_log(text){
-            result.value += text + "\n";
-
-        }
-
-        const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-        function check(){
-            if (document.form1.search.value == "" || document.form1.submit.value == "") {
-                alert("何か入力してください");
-                return false;
-            }
-            else {
-                // document.querySelector('textarea[name=show]').value = eel.write_log_py("hello");
-                // eel.write_log_py("hello");
-                eel.kimetsu_search(search.value)
-
-                eel.write_log(text)
-                _sleep(5000)
-                return false;
-            }
-        }
-
-
-
-
-  
-    </script>
-
+    </div>
+ 
 
 
     

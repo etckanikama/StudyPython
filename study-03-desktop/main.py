@@ -19,9 +19,9 @@ time.sleep(2)
 #     eel.write_log("hello")
 
 @eel.expose
-def kimetu_search(word):
+def kimetsu_search(word):
     # search.pyの関数を呼び出すための関数
-    search.kimetu_search(word)
+    search.kimetsu_search(word)
 
 
 desktop.start(app_name,end_point,size)

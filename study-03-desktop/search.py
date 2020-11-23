@@ -4,7 +4,7 @@ import eel
 ### デスクトップアプリ作成課題
 def kimetsu_search(word):
     # 検索対象取得
-    df=pd.read_csv("./source.csv")
+    df=pd.read_csv("./source.csv", encoding="shift-jis")
     source=list(df["name"])
 
     # 検索
@@ -19,6 +19,6 @@ def kimetsu_search(word):
     
     # CSV書き込み
     df=pd.DataFrame(source,columns=["name"])
-    df.to_csv("./source.csv",encoding="utf_8-sig")
+    df.to_csv("./source.csv",encoding="shift-jis")
     print(source)
 
