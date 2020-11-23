@@ -1,5 +1,6 @@
 import eel
 import time
+import search
 import desktop
 
 
@@ -12,10 +13,15 @@ size = (700,600)
 
 
 
-time.sleep(10)
+time.sleep(2)
+# @eel.expose
+# def write_log_py(text):
+#     eel.write_log("hello")
+
 @eel.expose
-def write_log_py(text):
-    eel.write_log("hello")
+def kimetu_search(word):
+    # search.pyの関数を呼び出すための関数
+    search.kimetu_search(word)
 
 
 desktop.start(app_name,end_point,size)

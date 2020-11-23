@@ -1,38 +1,24 @@
-import csv
-CSV_PATH = 'data.csv'
+import pandas as pd
+import eel
 
-# 検索ソース
-# source=["ねずこ","たんじろう","きょうじゅろう","ぎゆう","げんや","かなお","ぜんいつ"]
+### デスクトップアプリ作成課題
+def kimetsu_search(word):
+    # 検索対象取得
+    df=pd.read_csv("./source.csv")
+    source=list(df["name"])
 
-# csvファイル読み込み
-def read_csv_hoge(data):
-    with open(CSV_PATH, encoding="utf-8_sig") as f:
-        for line in csv.reader(f):
-            pass
-    return line
-
-
-
-## 検索ツール
-def search():
-    word =input("鬼滅の登場人物の名前を入力してください >>> ")
-
-    csv_array = read_csv_hoge(CSV_PATH)
-    ### ここに検索ロジックを書く
-    if word in csv_array:
-        print("{}が見つかりした".format(word))
+    # 検索
+    if word in source:
+        print("『{}』はあります".format(word))
+        eel.write_log("{}はいます。".format(word))
     else:
-        print("{}はいません".format(word))
-        csv_array.append(word)
-        with open(CSV_PATH,'w') as f:
-            writer = csv.writer(f)
-            writer.writerow(csv_array)
+        print("『{}』はありません".format(word))
+        eel.write_log("{}はいません".format(word))
 
-    # a = read_csv_hoge(CSV_PATH)
-    # print(a)
+        source.append(word)
+    
+    # CSV書き込み
+    df=pd.DataFrame(source,columns=["name"])
+    df.to_csv("./source.csv",encoding="utf_8-sig")
+    print(source)
 
-
-        
-        
-if __name__ == "__main__":
-    search()
