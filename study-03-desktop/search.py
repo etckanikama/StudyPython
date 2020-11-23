@@ -2,9 +2,9 @@ import pandas as pd
 import eel
 
 ### デスクトップアプリ作成課題
-def kimetsu_search(word):
+def kimetsu_search(word,text):
     # 検索対象取得
-    df=pd.read_csv("./source.csv", encoding="shift-jis")
+    df=pd.read_csv("./{}".format(text), encoding="shift-jis")
     source=list(df["name"])
 
     # 検索
@@ -14,11 +14,12 @@ def kimetsu_search(word):
     else:
         print("『{}』はありません".format(word))
         eel.write_log("{}はいません".format(word))
+        eel.write_log("{}を追加".format(word))
 
         source.append(word)
     
     # CSV書き込み
     df=pd.DataFrame(source,columns=["name"])
-    df.to_csv("./source.csv",encoding="shift-jis")
+    df.to_csv("./{}".format(text),encoding="shift-jis")
     print(source)
 

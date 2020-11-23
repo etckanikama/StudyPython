@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EEL</title>
+    <title>きめつサーチ</title>
     <link rel="stylesheet" href="sample.css">
 
 </head>
 <body>
+    <h1>きめつサーチ</h1>
     <div class= "main">
         <!-- <form name="form1" action="" method="post"> -->
+        <input id ="text" type="text" type="text" name="text" placeholder="csvファイル(source.csv)">
         <p>検索したいキーワードを入力してください。</p>
         <input id ="search" type="search" name="search" placeholder="キーワードを入力">
         <input id ="submit" type="submit" name="submit" value="検索" onclick="return check();">
@@ -37,9 +39,9 @@
                 else {
                     // document.querySelector('textarea[name=show]').value = eel.write_log_py("hello");
                     // eel.write_log_py("hello");
-                    eel.kimetsu_search(search.value)
+                    eel.kimetsu_search(search.value, text.value)
     
-                    eel.write_log(text)
+
                     _sleep(5000)
                     return false;
                 }

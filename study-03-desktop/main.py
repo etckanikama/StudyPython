@@ -13,15 +13,15 @@ size = (700,600)
 
 
 
-time.sleep(2)
+
 # @eel.expose
 # def write_log_py(text):
 #     eel.write_log("hello")
 
 @eel.expose
-def kimetsu_search(word):
+def kimetsu_search(word,text):
     # search.pyの関数を呼び出すための関数
-    search.kimetsu_search(word)
+    search.kimetsu_search(word,text)
 
 
 desktop.start(app_name,end_point,size)
