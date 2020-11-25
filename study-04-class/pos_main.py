@@ -6,7 +6,11 @@ class Item:
         self.price=price
     
     def get_price(self):
-        return self.price
+        # return self.price
+        print(self.price)
+    
+    def get_name(self):
+        print(self.item_name)
 
 ### オーダークラス
 class Order:
@@ -38,6 +42,9 @@ def main():
     
     # オーダー表示
     order.view_item_list()
+    item = Item("001","りんご",100)
+    item.get_price()
+    item.get_name()
     
 if __name__ == "__main__":
     main()
