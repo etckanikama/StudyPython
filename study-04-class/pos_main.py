@@ -1,3 +1,6 @@
+import sys
+
+
 ### 商品クラス
 class Item:
     def __init__(self,item_code,item_name,price):
@@ -24,6 +27,10 @@ class Order:
     def view_item_list(self):
         for item in self.item_order_list:
             print("商品コード:{}".format(item))
+            for master in self.item_master:
+                if item == master.item_code:
+                    print(master.price)
+        
     
     
 ### メイン処理
@@ -42,9 +49,12 @@ def main():
     
     # オーダー表示
     order.view_item_list()
-    item = Item("001","りんご",100)
-    item.get_price()
-    item.get_name()
+
+    # インスタンス化して価格と名前表示メソッドを実行
+    # item = Item("001","りんご",100)
+    # item.get_price()
+    # item.get_name()
+    # order.view_item_lis
     
 if __name__ == "__main__":
     main()
