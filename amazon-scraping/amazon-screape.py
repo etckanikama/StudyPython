@@ -61,7 +61,9 @@ def main():
         print("prime会員ではありません")
 
         cur_url = driver.current_url
-        print("ASIN番号？：{}".format(cur_url[28:38]))
+        front = cur_url.find("/dp")
+        back =cur_url.find("/ref")
+        print("ASIN番号：{}".format(cur_url[front+4:back]))
 
         
 
