@@ -27,6 +27,9 @@ def set_driver(driver_path, headless_flg):
 
 
 def main():
+    # データ格納配列
+    custom_name_list = []
+    custom_url_list = []
 
     # driverを起動
     if os.name == 'nt': #Windows
@@ -38,36 +41,43 @@ def main():
     driver.get("https://www.amazon.co.jp/gp/bestsellers/kitchen/ref=zg_bs_kitchen_home_all?")
     time.sleep(5)
 
-    # while (True):
-        # # 今回はxpathを使って<span>内の要素をとってくる
-        # # 参考url: https://qiita.com/sf213471118/items/61014ffe06a6ebf704ea
-        # time.sleep(5)
-        # title_name = driver.find_element_by_xpath("//span[@class='a-size-large product-title-word-break']")
-        # # for name in title_name:
-        # print("商品名：{}".format(title_name.text))
-        # price = driver.find_element_by_xpath("//span[@class='a-size-medium a-color-price priceBlockBuyingPriceString']") 
-        # print("価格：{}".format(price.text))
-        # deadline = driver.find_element_by_xpath("//div[@class='a-section a-spacing-mini']")
-        # print(deadline.text)
+    while (True):
 
-        # # primeかどうか
-        # # 複数個あるときはelementsのsを忘れてはいけない
-        # prime_check = driver.find_elements_by_xpath("//div[@class='nav-line-1-container']")[1]
-        # # print(prime_check.text)
-        # # prime_label = False
-        # if prime_check.text != "今すぐ登録":
-        #     # prime_label = True
-        #     print("prime会員です。")
-        # print("prime会員ではありません")
+        # 商品名を取得
+        custom_name_get = driver.find_elements_by_xpath("//div[@class='p13n-sc-truncate-desktop-type2 p13n-sc-truncated']")
+        # 商品URLを取得
+        url_xpath = driver.find_elements_by_xpath("//div[@class='a-row']/a[@class='a-link-normal a-text-normal']")
+        for i in range(len(url_xpath)):
+            custom_url_list.append(url_xpath[i].get_attribute("href"))
+            # print(url_xpath[i].get_attribute("href"))
+        print(len(custom_url_list))
 
-        # cur_url = driver.current_url
-        # front = cur_url.find("/dp")
-        # back =cur_url.find("/ref")
-        # print("ASIN番号：{}".format(cur_url[front+4:back]))
 
-        
+        #　商品名を取得してくる
+        for name in custom_name_get:
+            custom_name_list.append(name.text)
+            # print(name.text)
+        print(len(custom_name_list))
 
-        # break
+
+
+
+        try:
+            element = driver.find_element_by_class_name("a-last")
+            aTag = element.find_element_by_tag_name("a")
+            next_url = aTag.get_attribute("href")
+            driver.get(f'{next_url}')
+            time.sleep(5)
+
+        except:
+            print("商品ページはこれ以上存在しません")
+            break
+    colum = ['商品名','商品url']
+    # df作成
+    df = pd.DataFrame(list(zip(custom_name_list,custom_url_list)),columns=colum)
+    df.to_csv("custom_info.csv",encoding="utf-8_sig")
+
+
 
 
 if __name__ == "__main__":
