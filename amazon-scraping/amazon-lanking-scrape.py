@@ -43,16 +43,23 @@ def main():
 
     while (True):
 
-        # 商品名を取得
-        custom_name_get = driver.find_elements_by_xpath("//div[@class='p13n-sc-truncate-desktop-type2 p13n-sc-truncated']")
         # 商品URLを取得
-        url_xpath = driver.find_elements_by_xpath("//div[@class='a-row']/a[@class='a-link-normal a-text-normal']")
+        # url_xpath = driver.find_elements_by_xpath("//div[@class='a-row']/a[@class='a-link-normal a-text-normal']")
+        # for i in range(len(url_xpath)):
+        #     custom_url_list.append(url_xpath[i].get_attribute("href"))
+        #     # print(url_xpath[i].get_attribute("href"))
+        # print(len(custom_url_list))
+
+        url_xpath = driver.find_elements_by_xpath("//span[@class='aok-inline-block zg-item']/a[@class='a-link-normal']")
         for i in range(len(url_xpath)):
             custom_url_list.append(url_xpath[i].get_attribute("href"))
             # print(url_xpath[i].get_attribute("href"))
         print(len(custom_url_list))
+        
 
 
+
+        custom_name_get = driver.find_elements_by_xpath("//div[@class='p13n-sc-truncate-desktop-type2 p13n-sc-truncated']")
         #　商品名を取得してくる
         for name in custom_name_get:
             custom_name_list.append(name.text)
